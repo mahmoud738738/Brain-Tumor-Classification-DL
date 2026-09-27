@@ -176,12 +176,12 @@ Brain Tumor Classification/
 |   |-- 05_gradcam_localization_grid.png
 |   |-- 06_multi_brain_mri_montage.png
 |   |-- 07_multi_brain_cohort_mosaic_25.png
-|-- Training/                          # Training images (not tracked by git)
+|-- Training/                          # Training dataset images (2,870 MRI scans across 4 classes)
 |   |-- glioma_tumor/
 |   |-- meningioma_tumor/
 |   |-- no_tumor/
 |   |-- pituitary_tumor/
-|-- Testing/                           # Testing images (not tracked by git)
+|-- Testing/                           # Testing dataset images (394 MRI scans across 4 classes)
 |   |-- glioma_tumor/
 |   |-- meningioma_tumor/
 |   |-- no_tumor/
@@ -219,9 +219,9 @@ cd Brain-Tumor-Classification-DL
 pip install keras torch torchvision opencv-python scikit-learn matplotlib seaborn pillow pandas numpy
 ```
 
-**3. Download the dataset**
+**3. Dataset**
 
-Download the [Brain Tumor MRI Dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) from Kaggle and place the `Training/` and `Testing/` folders in the project root directory.
+The complete dataset (3,264 MRI images) is included directly in the repository inside `Training/` and `Testing/` directories. You can also download the raw dataset from [Kaggle](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset).
 
 **4. Run the notebook**
 ```bash

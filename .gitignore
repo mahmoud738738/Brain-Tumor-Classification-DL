@@ -1,7 +1,3 @@
-# Dataset images (too large for GitHub)
-Training/
-Testing/
-
 # Trained model weights
 *.keras
 *.h5
