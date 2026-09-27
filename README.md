@@ -1,4 +1,4 @@
-# Brain Tumor Classification with Deep Learning
+# Brain Tumor Classification with Deep Learning (DL)
 
 A production-grade medical image classification pipeline that classifies brain MRI scans into four categories using a custom CNN baseline and fine-tuned MobileNetV2, with Grad-CAM explainability for clinical transparency.
 
@@ -111,15 +111,45 @@ Fine-tuned MobileNetV2 pre-trained on ImageNet for superior accuracy.
 
 ## Results
 
-| Metric       | Custom CNN | MobileNetV2 |
-|--------------|------------|-------------|
-| Accuracy     | —          | —           |
-| Sensitivity  | —          | —           |
-| F1-Score     | —          | —           |
-| Model Size   | —          | —           |
-| Inference (ms/sample) | — | —      |
+### Benchmark Summary
 
-> Full benchmark results with exact numbers are reported in Section 10 of the notebook.
+| Metric / Parameter | Custom CNN Baseline | MobileNetV2 (Transfer Learning) |
+|---|---|---|
+| Accuracy | 67.35% | 83.88% |
+| Macro Recall (Sensitivity) | 66.61% | 82.89% |
+| Macro F1-Score | 64.81% | 83.98% |
+| Dangerous False Negatives | 34 cases (8.19%) | 2 cases (0.48%) |
+| Model Size (Disk) | 78.01 MB | 22.78 MB |
+| Inference Latency (RTX 4060) | 3.17 ms/image | 44.65 ms/image |
+
+### Per-Class Evaluation Breakdown
+
+#### Custom CNN Baseline
+| Class | Precision | Recall | F1-Score | Support |
+|---|---|---|---|---|
+| Glioma Tumor | 60.00% | 84.17% | 70.06% | 139 |
+| Meningioma Tumor | 73.53% | 35.46% | 47.85% | 141 |
+| No Tumor | 56.41% | 58.67% | 57.52% | 75 |
+| Pituitary Tumor | 79.87% | 88.15% | 83.80% | 135 |
+| **Macro Average** | **67.45%** | **66.61%** | **64.81%** | **490** |
+| **Weighted Average** | **68.82%** | **67.35%** | **65.53%** | **490** |
+
+#### MobileNetV2 (Transfer Learning)
+| Class | Precision | Recall | F1-Score | Support |
+|---|---|---|---|---|
+| Glioma Tumor | 85.16% | 78.42% | 81.65% | 139 |
+| Meningioma Tumor | 74.84% | 84.40% | 79.33% | 141 |
+| No Tumor | 96.55% | 74.67% | 84.21% | 75 |
+| Pituitary Tumor | 87.59% | 94.07% | 90.71% | 135 |
+| **Macro Average** | **86.03%** | **82.89%** | **83.98%** | **490** |
+| **Weighted Average** | **84.60%** | **83.88%** | **83.87%** | **490** |
+
+### Clinical Safety Analysis
+A crucial clinical safety criterion is avoiding dangerous false negatives (diagnosing a tumor patient as 'No Tumor'):
+- Custom CNN: 34 missed cases (8.19% false negative rate)
+- MobileNetV2: 2 missed cases (0.48% false negative rate)
+
+MobileNetV2 reduced missed tumor cases by 94.1%, providing strong diagnostic reliability for clinical screening.
 
 ---
 
@@ -180,8 +210,8 @@ Brain Tumor Classification/
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/mahmoud738738/brain-tumor-classification.git
-cd brain-tumor-classification
+git clone https://github.com/mahmoud738738/Brain-Tumor-Classification-DL.git
+cd Brain-Tumor-Classification-DL
 ```
 
 **2. Install dependencies**
